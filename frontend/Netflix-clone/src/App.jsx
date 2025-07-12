@@ -1,13 +1,16 @@
-import { Router,route } from "react-router-dom"
-import SignIn from "./pages/signin"
+import Landingpage from "./pages/landingpage"
+import { Routes,Route } from "react-router-dom"
+import Signin from "./pages/signin"
 
 const App = () => {
   return (
-    <div>
-      <Router>
-        <route path="/signin" element={<SignIn/>} />
-      </Router>
-    </div>
+   <>
+
+   <Routes>
+    <Route path="/" element={<Landingpage />} />
+      <Route path="/signin" element={<Signin />} />
+    </Routes> 
+   </>
   )
 }
 
