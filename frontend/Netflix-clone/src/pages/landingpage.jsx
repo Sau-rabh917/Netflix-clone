@@ -7,6 +7,35 @@ const Landingpage = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [email, setEmail] = useState("");
 
+  // FAQ Section State
+  const [openFAQ, setOpenFAQ] = useState(null);
+  const faqs = [
+    {
+      question: 'What is Netflix?',
+      answer: 'Netflix is a streaming service that offers a wide variety of award-winning TV shows, movies, anime, documentaries, and more on thousands of internet-connected devices.'
+    },
+    {
+      question: 'How much does Netflix cost?',
+      answer: 'Watch Netflix on your smartphone, tablet, Smart TV, laptop, or streaming device, all for one fixed monthly fee. Plans range from ₹149 to ₹649 a month. No extra costs, no contracts.'
+    },
+    {
+      question: 'Where can I watch?',
+      answer: 'Watch anywhere, anytime. Sign in with your Netflix account to watch instantly on the web at netflix.com from your personal computer or on any internet-connected device.'
+    },
+    {
+      question: 'How do I cancel?',
+      answer: 'Netflix is flexible. There are no annoying contracts and no commitments. You can easily cancel your account online in two clicks.'
+    },
+    {
+      question: 'What can I watch on Netflix?',
+      answer: 'Netflix has an extensive library of feature films, documentaries, TV shows, anime, award-winning Netflix originals, and more.'
+    },
+    {
+      question: 'Is Netflix good for kids?',
+      answer: 'The Netflix Kids experience is included in your membership to give parents control while kids enjoy family-friendly TV shows and movies in their own space.'
+    },
+  ];
+
   const toggleLanguage = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
@@ -209,6 +238,78 @@ const Landingpage = () => {
           </div>
         </div>
       </div>
+
+      {/* FAQ Section */}
+      <div className="w-full bg-black bg-opacity-95 py-12 px-2 xs:px-4 sm:px-8 md:px-16 flex flex-col items-center">
+        <h2 className="text-white text-2xl sm:text-3xl font-bold mb-8 ">Frequently Asked Questions</h2>
+        <div className="flex flex-col gap-4 w-3/4 max-w-3xl mx-auto items-start">
+          {faqs.map((faq, idx) => (
+            <div key={idx} className="w-full flex flex-col ">
+              <div
+                className="w-full h-20 bg-gray-800 rounded-md flex items-center justify-between px-6 cursor-pointer border border-gray-500 text-white text-base sm:text-lg font-semibold transition-colors duration-200 hover:bg-gray-800 text-left"
+                onClick={() => setOpenFAQ(openFAQ === idx ? null : idx)}
+              >
+                <span>{faq.question}</span>
+                <span className="text-2xl font-bold select-none">
+                  {openFAQ === idx ? '-' : '+'}
+                </span>
+              </div>
+              {/* Dropdown answer */}
+              {openFAQ === idx && (
+                <div className="w-full bg-gray-800 bg-opacity-90 text-white text-sm sm:text-base rounded-b-md px-6 py-4 border-t border-gray-700 animate-fadeIn">
+                  {faq.answer}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+        {/* Email Input and Get Started in FAQ Section */}
+        <div className="w-full flex flex-col items-center mt-10">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center w-full max-w-2xl">
+            <input
+              type="email"
+              placeholder="Email address"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full max-w-2xl px-8 py-6 rounded bg-black bg-opacity-80 border-2 border-gray-400 text-white placeholder-gray-300 focus:outline-none focus:border-red-500 transition-colors text-xl sm:text-2xl font-semibold"
+            />
+            <button
+              onClick={handleGetStarted}
+              className="sm:w-auto w-full bg-red-600 px-8 py-6 rounded font-bold hover:bg-red-700 transition-all duration-200 text-xl sm:text-2xl whitespace-nowrap"
+              style={{ minWidth: 'fit-content' }}
+            >
+              Get Started
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Footer Section */}
+      <footer className="w-full bg-black bg-opacity-95 border-t border-gray-800 mt-16 py-10 px-2 xs:px-4 sm:px-8 md:px-16">
+        <div className="max-w-6xl mx-auto text-gray-400 text-sm">
+          <div className="mb-8">
+            <span className="block mb-2">Questions? Call <a href="tel:000-800-040-1843" className="underline hover:text-white">000-800-040-1843</a></span>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 mb-8">
+            <a href="#" className="hover:underline hover:text-white">FAQ</a>
+            <a href="#" className="hover:underline hover:text-white">Help Center</a>
+            <a href="#" className="hover:underline hover:text-white">Account</a>
+            <a href="#" className="hover:underline hover:text-white">Media Center</a>
+            <a href="#" className="hover:underline hover:text-white">Investor Relations</a>
+            <a href="#" className="hover:underline hover:text-white">Jobs</a>
+            <a href="#" className="hover:underline hover:text-white">Ways to Watch</a>
+            <a href="#" className="hover:underline hover:text-white">Terms of Use</a>
+            <a href="#" className="hover:underline hover:text-white">Privacy</a>
+            <a href="#" className="hover:underline hover:text-white">Cookie Preferences</a>
+            <a href="#" className="hover:underline hover:text-white">Corporate Information</a>
+            <a href="#" className="hover:underline hover:text-white">Contact Us</a>
+          </div>
+          <div className="mb-4">
+            <button className="bg-black bg-opacity-70 text-gray-300 px-3 py-1 rounded border border-gray-600 text-xs hover:bg-opacity-90">English</button>
+          </div>
+          <div className="text-xs text-gray-500">Netflix India Clone &copy; {new Date().getFullYear()}</div>
+        </div>
+      </footer>
     </>
   );
 };
